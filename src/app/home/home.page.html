@@ -17,10 +17,28 @@
       <ion-checkbox slot="start" [value]="item.isDone" (ionChange)="changeItem(item)"></ion-checkbox>
     </ion-item>
 
+    <!-- versión SIN AUTOCOMPLETE 
     <ion-item lines="none" *ngIf="newItem">
       <ion-input [(ngModel)]="newItem.name" (ionBlur)="addItem()"></ion-input>
       <ion-checkbox slot="start" [(ngModel)]="newItem.isDone"></ion-checkbox>
     </ion-item>
+    -->
+
+    <!-- versión CON AUTOCOMPLETE -->
+    <div class="autocomplete" *ngIf="newItem">
+      <ion-item lines="none">
+        <ion-input  type="text" 
+                    [(ngModel)]="newItem.name"
+                    (ionBlur)="addItem()"
+                    (ionChange)="autocompleteSearch()"
+                    debounce=500></ion-input>
+      </ion-item>
+      <ion-list>
+        <ion-item *ngFor="let option of autocompleteFilteredOptions" (click)="selectOption(option)">
+          {{option}}
+        </ion-item>
+      </ion-list>
+    </div>
 
     <ion-item lines="none">
       <ion-button color="light" (click)="showAddItem()">+</ion-button>

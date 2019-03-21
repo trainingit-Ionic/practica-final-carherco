@@ -1,1 +1,27 @@
+.autocomplete {
+  width: 100%;
 
+  ion-item {
+      ion-input {
+          padding: 1px !important;
+      }
+  }
+
+  ion-list {
+      position: absolute;
+      width: 95%;
+      overflow-y: scroll;
+      max-height: 150%;
+      border: 5px;
+      z-index: 999;
+
+      ion-item {
+          background: #aaaaaa;
+      }
+
+      ion-item:hover {
+          cursor: pointer;
+          background: #999999
+      }
+  }
+}

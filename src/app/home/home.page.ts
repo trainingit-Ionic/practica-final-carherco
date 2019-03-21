@@ -12,10 +12,14 @@ import { tap } from 'rxjs/operators';
 export class HomePage {
   newItem: Item;
   items$: Observable<Item[]>;
+  autocompleteOptions: string[];
+  autocompleteFilteredOptions: string[] = [];
   
-
   constructor(private listService: ListService) {
-    this.items$ = this.listService.getItems$().pipe(tap(x => console.log(x)));
+    this.items$ = this.listService.getItems$();
+    this.listService.getHistory$().subscribe(
+      history => this.autocompleteOptions = history
+    );
   }
 
   showAddItem() {
@@ -36,4 +40,20 @@ export class HomePage {
   cleanList() {
     this.listService.cleanList();
   }
+
+  autocompleteSearch() {
+    if (!this.newItem.name.trim().length) {
+      this.autocompleteFilteredOptions = [];
+      return;
+    }
+    
+    this.autocompleteFilteredOptions = this.autocompleteOptions.filter( name => name.toLowerCase().includes(this.newItem.name.toLowerCase()));
+    console.log(this.autocompleteFilteredOptions);
+  }
+
+  selectOption(option: string) {
+    this.newItem.name = option;
+  }
+
+  
 }
