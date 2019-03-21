@@ -3,6 +3,9 @@
     <ion-title>
       Shopping List
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cleanList()"><ion-icon slot="icon-only" name="trash"></ion-icon></ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -11,7 +14,7 @@
 
     <ion-item lines="none" *ngFor="let item of items$|async" >
       <ion-label>{{ item.name }}</ion-label>
-      <ion-checkbox slot="start" [value]="item.isDone"></ion-checkbox>
+      <ion-checkbox slot="start" [value]="item.isDone" (ionChange)="changeItem(item)"></ion-checkbox>
     </ion-item>
 
     <ion-item lines="none" *ngIf="newItem">

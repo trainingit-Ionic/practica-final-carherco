@@ -28,4 +28,12 @@ export class HomePage {
     }
     this.newItem = null;
   }
+
+  changeItem(item: Item) {
+    item.isDone ? this.listService.unmarkItem(item) : this.listService.markItem(item);
+  }
+
+  cleanList() {
+    this.listService.cleanList();
+  }
 }
