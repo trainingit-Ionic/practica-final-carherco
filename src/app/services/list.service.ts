@@ -13,7 +13,7 @@ export class ListService {
   constructor() { }
 
   private notify(): void {
-    this.items$.next({...this.items});
+    this.items$.next([...this.items]);
   }
 
   public getItems$(): Observable<Item[]> {
@@ -33,7 +33,7 @@ export class ListService {
   markItem(item: Item): void {
     this.items.map( (el) => {
       if(el.name == item.name) {
-        el.pending = false;
+        el.isDone = true;
       }
       return el;
     });
@@ -43,7 +43,7 @@ export class ListService {
   unmarkItem(item: Item): void {
     this.items.map( (el) => {
       if(el.name == item.name) {
-        el.pending = true;
+        el.isDone = false;
       }
       return el;
     });

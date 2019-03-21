@@ -1,14 +1,28 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Ionic Blank
+      Shopping List
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-list>
+
+    <ion-item lines="none" *ngFor="let item of items$|async" >
+      <ion-label>{{ item.name }}</ion-label>
+      <ion-checkbox slot="start" [value]="item.isDone"></ion-checkbox>
+    </ion-item>
+
+    <ion-item lines="none" *ngIf="newItem">
+      <ion-input [(ngModel)]="newItem.name" (ionBlur)="addItem()"></ion-input>
+      <ion-checkbox slot="start" [(ngModel)]="newItem.isDone"></ion-checkbox>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-button color="light" (click)="showAddItem()">+</ion-button>
+    </ion-item>
+    
+
+  </ion-list>
 </ion-content>

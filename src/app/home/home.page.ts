@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { Item } from 'src/app/model/item';
+import { ListService } from 'src/app/services/list.service';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +10,22 @@ import { Component } from '@angular/core';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  newItem: Item;
+  items$: Observable<Item[]>;
+  
 
+  constructor(private listService: ListService) {
+    this.items$ = this.listService.getItems$().pipe(tap(x => console.log(x)));
+  }
+
+  showAddItem() {
+    this.newItem = new Item('');
+  }
+
+  addItem() {
+    if(this.newItem.name) {
+      this.listService.addItem(this.newItem);
+    }
+    this.newItem = null;
+  }
 }
