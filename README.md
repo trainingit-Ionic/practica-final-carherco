@@ -3,7 +3,7 @@ Práctica final para el curso de Ionic
 
 ## Enunciado
 
-Se trata de desarrollar una app que sirva para realizar listas de la compra
+Se trata de desarrollar una app que sirva para realizar una lista de la compra para ir al supermercado y que no se te olvide nada de la lista.
 
 ### Funcionalidades obligatorias de la app
 
